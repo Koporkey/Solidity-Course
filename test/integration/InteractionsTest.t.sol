@@ -21,10 +21,10 @@ contract InteractionsTest is Test {
     }
 
     function testUserCanFundInteractions() public {
-       FundFundMe funder = new FundFundMe();
-       funder.fundFundMe(address(fundMe));
+        FundFundMe funder = new FundFundMe();
+        funder.fundFundMe(address(fundMe));
 
-       WithdrawFundMe withdrawFundMe = new WithdrawFundMe();
+        WithdrawFundMe withdrawFundMe = new WithdrawFundMe();
         withdrawFundMe.withdrawFundMe(address(fundMe));
         assert(address(fundMe).balance == 0);
     }

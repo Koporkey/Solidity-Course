@@ -14,7 +14,7 @@ contract FundMeTest is Test {
     uint256 constant GAS_PRICE = 1;
 
     function setUp() external {
-       // fundMe = new FundMe(0x694AA1769357215DE4FAC081bf1f309aDC325306);
+        // fundMe = new FundMe(0x694AA1769357215DE4FAC081bf1f309aDC325306);
         DeployFundMe deployFundMe = new DeployFundMe();
         fundMe = deployFundMe.run();
         vm.deal(USER, STARTING_BALANCE);
@@ -23,8 +23,8 @@ contract FundMeTest is Test {
     function testMinimumDollarIsFive() public {
         assertEq(fundMe.MINIMUM_USD(), 5 * 10 ** 18);
     }
-    
-    function testOwnerIsMsgSender() public{
+
+    function testOwnerIsMsgSender() public {
         assertEq(fundMe.getOwner(), msg.sender);
     }
 
@@ -79,10 +79,7 @@ contract FundMeTest is Test {
         uint256 endingOwnerBalance = fundMe.getOwner().balance;
         uint256 endingFundMeBalance = address(fundMe).balance;
         assertEq(endingFundMeBalance, 0);
-        assertEq(
-            startingFundMeBalance + startingOwnerBalance,
-            endingOwnerBalance
-        );
+        assertEq(startingFundMeBalance + startingOwnerBalance, endingOwnerBalance);
     }
 
     function testWidrawfromMultipleFundersCheaper() public funded {
@@ -109,11 +106,9 @@ contract FundMeTest is Test {
         uint256 endingOwnerBalance = fundMe.getOwner().balance;
         uint256 endingFundMeBalance = address(fundMe).balance;
         assertEq(endingFundMeBalance, 0);
-        assertEq(
-            startingFundMeBalance + startingOwnerBalance,
-            endingOwnerBalance
-        );
+        assertEq(startingFundMeBalance + startingOwnerBalance, endingOwnerBalance);
     }
+
     function testWidrawfromMultipleFunders() public funded {
         // Arrange
         uint160 numberOfFunders = 10;
@@ -138,9 +133,6 @@ contract FundMeTest is Test {
         uint256 endingOwnerBalance = fundMe.getOwner().balance;
         uint256 endingFundMeBalance = address(fundMe).balance;
         assertEq(endingFundMeBalance, 0);
-        assertEq(
-            startingFundMeBalance + startingOwnerBalance,
-            endingOwnerBalance
-        );
+        assertEq(startingFundMeBalance + startingOwnerBalance, endingOwnerBalance);
     }
 }

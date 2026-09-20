@@ -43,26 +43,17 @@ contract FundMe {
     function cheaperWithdraw() public onlyOwner {
         uint256 fundersLength = s_funders.length;
         // mappings can't be in memory, sorry!
-        for (
-            uint256 funderIndex = 0; 
-            funderIndex < fundersLength; 
-            funderIndex++
-        ) {
+        for (uint256 funderIndex = 0; funderIndex < fundersLength; funderIndex++) {
             address funder = s_funders[funderIndex];
             s_addressToAmountFunded[funder] = 0;
         }
         s_funders = new address[](0);
-        (bool success, ) = payable(msg.sender).call{
-            value: address(this).balance
-        }("");
+        (bool success,) = payable(msg.sender).call{value: address(this).balance}("");
         require(success, "Call failed");
     }
 
     function withdraw() public onlyOwner {
-        for (
-            uint256 funderIndex = 0; 
-            funderIndex < s_funders.length; funderIndex++
-        ) {
+        for (uint256 funderIndex = 0; funderIndex < s_funders.length; funderIndex++) {
             address funder = s_funders[funderIndex];
             s_addressToAmountFunded[funder] = 0;
         }
@@ -98,9 +89,7 @@ contract FundMe {
         fund();
     }
 
-    function getaddressToAmountFunded(
-        address fundingAddress) 
-        external view returns (uint256) {
+    function getaddressToAmountFunded(address fundingAddress) external view returns (uint256) {
         return s_addressToAmountFunded[fundingAddress];
     }
 
